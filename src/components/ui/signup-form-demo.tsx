@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import axios from "axios";
 import { signIn } from "next-auth/react";
+import { API_BASE_URL } from "@/constants";
 import { useRouter } from "next/navigation";
 
 export default function SignupFormDemo() {
@@ -35,7 +36,7 @@ export default function SignupFormDemo() {
     // // TODO: API call with formData
     try {
       // 1️⃣ Call backend signup API
-      const res = await axios.post("http://localhost:5000/api/v1/user/signup", {
+      const res = await axios.post(`${API_BASE_URL}/api/v1/user/signup`, {
         firstName: formData.firstName,
         lastName: formData.lastName,
         username: formData.username,

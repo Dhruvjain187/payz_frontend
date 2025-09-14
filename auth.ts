@@ -2,6 +2,7 @@
 import { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials"
 import axios from "axios";
+import { API_BASE_URL } from "./src/constants";
 import { error } from "console";
 
 
@@ -17,7 +18,7 @@ export const authOptions: NextAuthOptions = {
                 try {
 
                     console.log("username=", credentials.username)
-                    const user = await axios.post(`http://localhost:5000/api/v1/user/signin`, {
+                    const user = await axios.post(`${API_BASE_URL}/api/v1/user/signin`, {
                         username: credentials.username,
                         password: credentials.password
                     });

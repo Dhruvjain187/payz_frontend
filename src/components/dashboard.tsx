@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { BulkUser } from "@/types/apiTypes";
 import axios from "axios";
+import { API_BASE_URL } from "@/constants";
 import { useSession, signOut } from "next-auth/react";
 import { LogOut, User, Send } from "lucide-react";
 import {
@@ -50,7 +51,7 @@ export default function PayZapDashboard() {
     //     try {
     //         const sendMoney = async () => {
     //             try {
-    //                 const res = await axios.post("http://localhost:5000/api/v1/account/transfer", {
+    //                 const res = await axios.post(`${API_BASE_URL}/api/v1/account/transfer`, {
     //                     amount: amount,
     //                     to: selectedUser.id
     //                 }, {
@@ -78,7 +79,7 @@ export default function PayZapDashboard() {
         if (!amount || !selectedUser || !token) return;
 
         try {
-            const res = await axios.post("http://localhost:5000/api/v1/account/transfer", {
+            const res = await axios.post(`${API_BASE_URL}/api/v1/account/transfer`, {
                 amount: parseFloat(amount), // Convert to number
                 to: selectedUser.id
             }, {
@@ -92,7 +93,7 @@ export default function PayZapDashboard() {
             alert(`Successfully sent ₹${amount} to ${selectedUser.username}`);
 
             // Refresh user's balance after successful transfer
-            const balanceRes = await axios.get("http://localhost:5000/api/v1/user/personalInfo", {
+            const balanceRes = await axios.get(`${API_BASE_URL}/api/v1/user/personalInfo`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -120,7 +121,7 @@ export default function PayZapDashboard() {
         if (!token) return;
         const fetchUsers = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/api/v1/user/bulk", {
+                const res = await axios.get(`${API_BASE_URL}/api/v1/user/bulk`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
@@ -138,7 +139,7 @@ export default function PayZapDashboard() {
 
         const fetchUserInfo = async () => {
             try {
-                const res = await axios.get("http://localhost:5000/api/v1/user/personalInfo", {
+                const res = await axios.get(`${API_BASE_URL}/api/v1/user/personalInfo`, {
                     headers: {
                         'Authorization': `Bearer ${token}`
                     }
